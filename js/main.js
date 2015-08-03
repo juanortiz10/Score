@@ -1,8 +1,6 @@
 function scoreLeft() {
   var score=document.getElementById("btnScoreL").value;
-  if (score>=25) {
-    inner("game","Left Team Winner");
-    //document.getElementById("game").innerHTML="Left team Winner";
+  if (score==25) {
     reset();
   }else {
     score++;
@@ -14,8 +12,7 @@ function scoreLeft() {
 
 function scoreRight(){
   var score=document.getElementById("btnScoreR").value;
-  if (score>=25) {
-    inner("game","Right Team Winner");
+  if (score==25) {
     reset();
   }else {
     score++;
@@ -26,23 +23,15 @@ function scoreRight(){
 }
 
 function simulate(){
-  reset();
-  var value=0,pointsL=0,pointsR=0;
-  while(pointsL <25 || pointsR<25){
-    value=Math.floor((Math.random()*2)+1);
-    if (value==1) {
-      pointsR++;
-      points=document.getElementById("btnScoreR").value;
-      inner("btnScoreR",pointsR);
-      document.getElementById("btnScoreR").value=(pointsR);
-    }else{
-      points=document.getElementById("btnScoreL").value;
-      pointsL++;
-      inner("btnScoreL",pointsL);
-      document.getElementById("btnScoreL").value=(pointsL);
-      }
+  var condition=true;
+  while (condition) {
+    if (document.getElementById("btnScoreL").value && document.getElementById("btnScoreR").value >=25) condition=false;
+    var number=Math.floor((Math.random()*2)+1);
+    if (number==1) scoreRight();
+    else scoreLeft();
   }
 }
+
 function reset(){
   document.getElementById("btnScoreL").value=0;
   document.getElementById("btnScoreR").value=0;
